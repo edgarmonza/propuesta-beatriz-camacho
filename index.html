@@ -2011,29 +2011,36 @@
     })();
 
     // ========== SWIPER CAROUSEL INITIALIZATION ==========
-    const mockupSwiper = new Swiper('.mockupSwiper', {
-      slidesPerView: 1,
-      spaceBetween: 30,
-      loop: false,
-      speed: 600,
-      effect: 'slide',
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        dynamicBullets: false,
-      },
-      keyboard: {
-        enabled: true,
-        onlyInViewport: true,
-      },
-      grabCursor: true,
-      touchRatio: 1,
-      touchAngle: 45,
-      simulateTouch: true,
+    document.addEventListener('DOMContentLoaded', function() {
+      const mockupSwiper = new Swiper('.mockupSwiper', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: false,
+        speed: 600,
+        effect: 'slide',
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: false,
+        },
+        keyboard: {
+          enabled: true,
+          onlyInViewport: true,
+        },
+        grabCursor: true,
+        touchRatio: 1,
+        touchAngle: 45,
+        simulateTouch: true,
+        on: {
+          init: function() {
+            console.log('Swiper initialized with ' + this.slides.length + ' slides');
+          }
+        }
+      });
     });
 
     // ========== GAP TABS FUNCTIONALITY ==========
