@@ -1048,6 +1048,7 @@
 
     /* ========== RESPONSIVE ========== */
     @media (max-width: 768px) {
+      /* Grid layouts to single column */
       .gap-grid,
       .deliverables-grid,
       .investment-breakdown {
@@ -1060,15 +1061,97 @@
 
       .studio-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
       }
 
+      /* Navigation */
       .nav-container {
         padding: 1rem 1.5rem;
       }
 
+      /* Section spacing */
       .section {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+
+      /* Typography */
+      .display-1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+      }
+
+      .hero-title {
+        font-size: 2.75rem;
+      }
+
+      .body-large {
+        font-size: 1rem;
+      }
+
+      /* Hero */
+      .hero {
+        min-height: 85vh;
+        padding-top: 6rem;
+      }
+
+      /* Mockup captions */
+      .mockup-caption {
+        padding: 0 1rem;
+      }
+
+      .mockup-caption-title {
+        font-size: 0.875rem;
+      }
+
+      .mockup-caption-text {
+        font-size: 0.875rem;
+      }
+
+      /* Gap/Tab cards */
+      .gap-card-full {
+        padding: 1.5rem;
+      }
+
+      /* Accordion */
+      .accordion-content .deliverable-item {
+        margin: 0 1.5rem 1rem 1.5rem;
+        padding: 1.25rem;
+      }
+
+      /* Investment card */
+      .investment-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .investment-amount {
+        font-size: 3rem;
+      }
+
+      .payment-item {
+        padding: 1.5rem;
+      }
+
+      /* Studio section */
+      .studio-features li {
+        font-size: 0.95rem;
+      }
+
+      /* Phase cards */
+      .phase-card {
+        padding: 1.5rem;
+      }
+
+      .phase-title {
+        font-size: 1.125rem;
+      }
+
+      /* Mockups spacing */
+      .mockups-vertical-wrapper {
+        gap: 3rem;
+        margin: 2rem 0;
       }
     }
   </style>
