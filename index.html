@@ -2011,87 +2011,103 @@
 
     })();
 
-    // ========== MOCKUP CAROUSEL - SIMPLIFIED ==========
-    window.initCarousel = function() {
-      const track = document.querySelector('.mockup-carousel-track');
-      const prevBtn = document.querySelector('.carousel-prev');
-      const nextBtn = document.querySelector('.carousel-next');
-      const dots = document.querySelectorAll('.carousel-dot');
+    // ========== MOCKUP CAROUSEL - SUPER SIMPLE DEBUG VERSION ==========
+    window.addEventListener('load', function() {
+      console.log('🎬 CAROUSEL: Page loaded, starting init...');
 
-      if (!track) return;
+      setTimeout(function() {
+        const track = document.querySelector('.mockup-carousel-track');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        const dots = document.querySelectorAll('.carousel-dot');
 
-      let currentSlide = 0;
-      const totalSlides = 3;
-
-      function updateCarousel() {
-        // Move track
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-        // Update dots
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === currentSlide);
+        console.log('🎬 CAROUSEL: Elements found:', {
+          track: !!track,
+          prevBtn: !!prevBtn,
+          nextBtn: !!nextBtn,
+          dots: dots.length
         });
 
-        // Update button states
-        if (prevBtn) prevBtn.disabled = currentSlide === 0;
-        if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
-      }
+        if (!track || !prevBtn || !nextBtn) {
+          console.error('🎬 CAROUSEL: Missing elements!');
+          return;
+        }
 
-      // Previous button
-      if (prevBtn) {
-        prevBtn.onclick = function(e) {
+        let currentSlide = 0;
+        const totalSlides = 3;
+
+        function updateCarousel() {
+          const offset = -currentSlide * 100;
+          track.style.transform = `translateX(${offset}%)`;
+          console.log('🎬 CAROUSEL: Moved to slide', currentSlide);
+
+          // Update dots
+          dots.forEach((dot, i) => {
+            if (i === currentSlide) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+
+          // Update buttons
+          prevBtn.disabled = currentSlide === 0;
+          nextBtn.disabled = currentSlide === 2;
+
+          // Scroll to top of carousel so user can see the change
+          document.querySelector('.mockup-carousel-wrapper').scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+          });
+        }
+
+        // PREV BUTTON with alert for testing
+        prevBtn.addEventListener('click', function(e) {
           e.preventDefault();
-          e.stopPropagation();
+          console.log('🎬 PREV CLICKED! Current:', currentSlide);
+          alert('Botón PREV clickeado! Slide actual: ' + currentSlide);
           if (currentSlide > 0) {
             currentSlide--;
             updateCarousel();
           }
-        };
-      }
+        }, true); // Use capture phase
 
-      // Next button
-      if (nextBtn) {
-        nextBtn.onclick = function(e) {
+        // NEXT BUTTON with alert for testing
+        nextBtn.addEventListener('click', function(e) {
           e.preventDefault();
-          e.stopPropagation();
-          if (currentSlide < totalSlides - 1) {
+          console.log('🎬 NEXT CLICKED! Current:', currentSlide);
+          alert('Botón NEXT clickeado! Slide actual: ' + currentSlide);
+          if (currentSlide < 2) {
             currentSlide++;
             updateCarousel();
           }
-        };
-      }
+        }, true); // Use capture phase
 
-      // Dot navigation
-      dots.forEach((dot, index) => {
-        dot.onclick = function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          currentSlide = index;
-          updateCarousel();
-        };
-      });
+        // Dot navigation
+        dots.forEach(function(dot, index) {
+          dot.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('🎬 DOT CLICKED:', index);
+            currentSlide = index;
+            updateCarousel();
+          });
+        });
 
-      // Keyboard navigation
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft' && currentSlide > 0) {
-          currentSlide--;
-          updateCarousel();
-        } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
-          currentSlide++;
-          updateCarousel();
-        }
-      });
+        // Keyboard
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowLeft' && currentSlide > 0) {
+            currentSlide--;
+            updateCarousel();
+          } else if (e.key === 'ArrowRight' && currentSlide < 2) {
+            currentSlide++;
+            updateCarousel();
+          }
+        });
 
-      // Initialize
-      updateCarousel();
-    };
-
-    // Wait for DOM and GSAP, then init carousel
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', window.initCarousel);
-    } else {
-      setTimeout(window.initCarousel, 100);
-    }
+        updateCarousel();
+        console.log('🎬 CAROUSEL: Initialized successfully!');
+      }, 500);
+    });
 
     // ========== GAP TABS FUNCTIONALITY ==========
     (function() {
