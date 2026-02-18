@@ -1196,20 +1196,20 @@
 
     <!-- Horizontal Scroll Carousel -->
     <div class="mockup-carousel-wrapper">
-      <div class="carousel-controls">
-        <button class="carousel-btn carousel-prev" onclick="window.carouselPrev()" aria-label="Previous">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 18l-6-6 6-6"/>
+      <div class="carousel-controls" style="position: relative; z-index: 1000;">
+        <button class="carousel-btn carousel-prev" onclick="alert('CLICK PREV!'); window.carouselPrev();" style="pointer-events: auto !important; z-index: 1001; cursor: pointer;" aria-label="Previous">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="pointer-events: none;">
+            <path d="M15 18l-6-6 6-6" style="pointer-events: none;"/>
           </svg>
         </button>
-        <div class="carousel-indicators">
-          <span class="carousel-dot active" onclick="window.carouselGo(0)" data-index="0"></span>
-          <span class="carousel-dot" onclick="window.carouselGo(1)" data-index="1"></span>
-          <span class="carousel-dot" onclick="window.carouselGo(2)" data-index="2"></span>
+        <div class="carousel-indicators" style="z-index: 1001;">
+          <span class="carousel-dot active" onclick="alert('CLICK DOT 0!'); window.carouselGo(0);" style="pointer-events: auto !important; cursor: pointer;" data-index="0"></span>
+          <span class="carousel-dot" onclick="alert('CLICK DOT 1!'); window.carouselGo(1);" style="pointer-events: auto !important; cursor: pointer;" data-index="1"></span>
+          <span class="carousel-dot" onclick="alert('CLICK DOT 2!'); window.carouselGo(2);" style="pointer-events: auto !important; cursor: pointer;" data-index="2"></span>
         </div>
-        <button class="carousel-btn carousel-next" onclick="window.carouselNext()" aria-label="Next">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18l6-6-6-6"/>
+        <button class="carousel-btn carousel-next" onclick="alert('CLICK NEXT!'); window.carouselNext();" style="pointer-events: auto !important; z-index: 1001; cursor: pointer;" aria-label="Next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="pointer-events: none;">
+            <path d="M9 18l6-6-6-6" style="pointer-events: none;"/>
           </svg>
         </button>
       </div>
