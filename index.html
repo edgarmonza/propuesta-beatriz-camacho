@@ -346,25 +346,28 @@
     }
 
     .mockup-carousel {
-      overflow: hidden;
-      cursor: grab;
-      user-select: none;
-    }
-
-    .mockup-carousel:active {
-      cursor: grabbing;
+      position: relative;
+      width: 100%;
     }
 
     .mockup-carousel-track {
-      display: flex;
-      gap: 0;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      width: 100%;
     }
 
     .mockup-slide {
-      flex: 0 0 100%;
-      min-width: 0;
-      padding: 0 1rem;
+      display: none;
+      width: 100%;
+    }
+
+    .mockup-slide.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .mockup-caption {
@@ -1217,7 +1220,7 @@
       <div class="mockup-carousel" id="mockupCarousel">
         <div class="mockup-carousel-track">
           <!-- Slide 1: Homepage -->
-          <div class="mockup-slide">
+          <div class="mockup-slide active">
             <div class="mockup-container">
               <img src="assets/screenshots/screenshot-homepage.jpg" alt="Homepage Beatriz Camacho - Feminidad Etérea" loading="lazy">
             </div>
@@ -2012,11 +2015,10 @@
 
     })();
 
-    // ========== CAROUSEL - INLINE ONCLICK VERSION ==========
+    // ========== CAROUSEL - SHOW/HIDE VERSION (BULLETPROOF) ==========
     var carouselCurrentSlide = 0;
 
     window.carouselPrev = function() {
-      alert('PREV clicked! Current slide: ' + carouselCurrentSlide);
       if (carouselCurrentSlide > 0) {
         carouselCurrentSlide--;
         updateCarouselSlide();
@@ -2024,7 +2026,6 @@
     };
 
     window.carouselNext = function() {
-      alert('NEXT clicked! Current slide: ' + carouselCurrentSlide);
       if (carouselCurrentSlide < 2) {
         carouselCurrentSlide++;
         updateCarouselSlide();
@@ -2032,24 +2033,25 @@
     };
 
     window.carouselGo = function(index) {
-      alert('DOT clicked! Going to slide: ' + index);
       carouselCurrentSlide = index;
       updateCarouselSlide();
     };
 
     function updateCarouselSlide() {
-      var track = document.querySelector('.mockup-carousel-track');
+      var slides = document.querySelectorAll('.mockup-slide');
       var dots = document.querySelectorAll('.carousel-dot');
+      var prevBtn = document.querySelector('.carousel-prev');
+      var nextBtn = document.querySelector('.carousel-next');
 
-      if (!track) {
-        alert('ERROR: Track not found!');
-        return;
+      // Hide all slides
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('active');
       }
 
-      var offset = -carouselCurrentSlide * 100;
-      track.style.transform = 'translateX(' + offset + '%)';
-
-      alert('Moved to slide ' + carouselCurrentSlide + ' with offset ' + offset + '%');
+      // Show current slide
+      if (slides[carouselCurrentSlide]) {
+        slides[carouselCurrentSlide].classList.add('active');
+      }
 
       // Update dots
       for (var i = 0; i < dots.length; i++) {
@@ -2059,11 +2061,21 @@
           dots[i].classList.remove('active');
         }
       }
+
+      // Update buttons
+      if (prevBtn) prevBtn.disabled = carouselCurrentSlide === 0;
+      if (nextBtn) nextBtn.disabled = carouselCurrentSlide === 2;
+
+      // Scroll to carousel
+      var carousel = document.querySelector('.mockup-carousel-wrapper');
+      if (carousel) {
+        carousel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     }
 
     // Initialize on load
     window.addEventListener('load', function() {
-      setTimeout(updateCarouselSlide, 500);
+      setTimeout(updateCarouselSlide, 100);
     });
 
     // ========== GAP TABS FUNCTIONALITY ==========
