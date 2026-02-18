@@ -357,13 +357,14 @@
 
     .mockup-carousel-track {
       display: flex;
-      gap: 2rem;
+      gap: 0;
       transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .mockup-slide {
       flex: 0 0 100%;
       min-width: 0;
+      padding: 0 1rem;
     }
 
     .mockup-caption {
@@ -2061,27 +2062,25 @@
           });
         }
 
-        // PREV BUTTON with alert for testing
+        // PREV BUTTON
         prevBtn.addEventListener('click', function(e) {
           e.preventDefault();
           console.log('🎬 PREV CLICKED! Current:', currentSlide);
-          alert('Botón PREV clickeado! Slide actual: ' + currentSlide);
           if (currentSlide > 0) {
             currentSlide--;
             updateCarousel();
           }
-        }, true); // Use capture phase
+        }, true);
 
-        // NEXT BUTTON with alert for testing
+        // NEXT BUTTON
         nextBtn.addEventListener('click', function(e) {
           e.preventDefault();
           console.log('🎬 NEXT CLICKED! Current:', currentSlide);
-          alert('Botón NEXT clickeado! Slide actual: ' + currentSlide);
           if (currentSlide < 2) {
             currentSlide++;
             updateCarousel();
           }
-        }, true); // Use capture phase
+        }, true);
 
         // Dot navigation
         dots.forEach(function(dot, index) {
