@@ -28,10 +28,14 @@
   <link href="https://api.fontshare.com/v2/css?f[]=telegraf@700,600,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
+  <!-- Swiper Carousel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
   <!-- GSAP Animation Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <style>
     /* ========== CSS VARIABLES - MONZA LAB BRAND ========== */
@@ -298,90 +302,85 @@
       }
     }
 
-    /* ========== HORIZONTAL CAROUSEL ========== */
+    /* ========== SWIPER CAROUSEL CUSTOM STYLES ========== */
     .mockup-carousel-wrapper {
       margin: 4rem 0;
       position: relative;
     }
 
-    .carousel-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
+    .swiper {
+      width: 100%;
+      height: auto;
+      padding-bottom: 3rem;
     }
 
-    .carousel-btn {
+    .swiper-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mockup-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .mockup-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+    }
+
+    /* Custom Navigation Buttons */
+    .swiper-button-prev,
+    .swiper-button-next {
       width: 48px;
       height: 48px;
       border-radius: 50%;
       background: var(--color-bg-secondary);
       border: 1px solid var(--color-border);
-      color: var(--color-text-primary);
-      cursor: pointer;
+      color: var(--color-text-primary) !important;
       transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .carousel-btn:hover:not(:disabled) {
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
       background: var(--color-accent);
-      color: var(--color-bg-primary);
+      color: var(--color-bg-primary) !important;
       border-color: var(--color-accent);
       transform: scale(1.1);
     }
 
-    .carousel-btn:disabled {
+    .swiper-button-disabled {
       opacity: 0.3;
       cursor: not-allowed;
     }
 
-    .carousel-indicators {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
+    /* Custom Pagination */
+    .swiper-pagination {
+      bottom: 0 !important;
     }
 
-    .carousel-dot {
+    .swiper-pagination-bullet {
       width: 8px;
       height: 8px;
-      border-radius: 50%;
       background: var(--color-border);
-      cursor: pointer;
+      opacity: 1;
       transition: all 0.3s;
     }
 
-    .carousel-dot.active {
+    .swiper-pagination-bullet-active {
       width: 32px;
       border-radius: 4px;
       background: var(--color-accent);
-    }
-
-    .mockup-carousel {
-      position: relative;
-      width: 100%;
-    }
-
-    .mockup-carousel-track {
-      position: relative;
-      width: 100%;
-    }
-
-    .mockup-slide {
-      display: none;
-      width: 100%;
-    }
-
-    .mockup-slide.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     .mockup-caption {
@@ -1211,30 +1210,12 @@
       Tu nueva presencia digital no es un template. Es una experiencia inmersiva que cuenta la historia de 30+ años de trayectoria, Milan Fashion Week, y Saks Fifth Avenue. Un sitio web que refleja el nivel de lujo y sofisticación de tus piezas.
     </p>
 
-    <!-- Horizontal Scroll Carousel -->
+    <!-- Swiper Carousel -->
     <div class="mockup-carousel-wrapper">
-      <div class="carousel-controls" style="position: relative; z-index: 1000;">
-        <button class="carousel-btn carousel-prev" onclick="window.carouselPrev();" style="pointer-events: auto; z-index: 1001; cursor: pointer;" aria-label="Previous">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="pointer-events: none;">
-            <path d="M15 18l-6-6 6-6" style="pointer-events: none;"/>
-          </svg>
-        </button>
-        <div class="carousel-indicators" style="z-index: 1001;">
-          <span class="carousel-dot active" onclick="window.carouselGo(0);" style="pointer-events: auto; cursor: pointer;" data-index="0"></span>
-          <span class="carousel-dot" onclick="window.carouselGo(1);" style="pointer-events: auto; cursor: pointer;" data-index="1"></span>
-          <span class="carousel-dot" onclick="window.carouselGo(2);" style="pointer-events: auto; cursor: pointer;" data-index="2"></span>
-        </div>
-        <button class="carousel-btn carousel-next" onclick="window.carouselNext();" style="pointer-events: auto; z-index: 1001; cursor: pointer;" aria-label="Next">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="pointer-events: none;">
-            <path d="M9 18l6-6-6-6" style="pointer-events: none;"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="mockup-carousel" id="mockupCarousel">
-        <div class="mockup-carousel-track">
+      <div class="swiper mockupSwiper">
+        <div class="swiper-wrapper">
           <!-- Slide 1: Homepage -->
-          <div class="mockup-slide active">
+          <div class="swiper-slide">
             <div class="mockup-container">
               <img src="assets/screenshots/screenshot-homepage.jpg" alt="Homepage Beatriz Camacho - Feminidad Etérea" loading="lazy">
             </div>
@@ -1247,7 +1228,7 @@
           </div>
 
           <!-- Slide 2: Tienda -->
-          <div class="mockup-slide">
+          <div class="swiper-slide">
             <div class="mockup-container">
               <img src="assets/screenshots/screenshot-tienda.jpg" alt="Tienda Beatriz Camacho" loading="lazy">
             </div>
@@ -1260,7 +1241,7 @@
           </div>
 
           <!-- Slide 3: Producto -->
-          <div class="mockup-slide">
+          <div class="swiper-slide">
             <div class="mockup-container">
               <img src="assets/screenshots/screenshot-producto.jpg" alt="Página de Producto Beatriz Camacho" loading="lazy">
             </div>
@@ -1272,13 +1253,13 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="carousel-hint">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-        <span>Arrastra o usa las flechas para navegar</span>
+        <!-- Navigation Buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
       </div>
     </div>
 
@@ -2029,67 +2010,30 @@
 
     })();
 
-    // ========== CAROUSEL - SHOW/HIDE VERSION (BULLETPROOF) ==========
-    var carouselCurrentSlide = 0;
-
-    window.carouselPrev = function() {
-      if (carouselCurrentSlide > 0) {
-        carouselCurrentSlide--;
-        updateCarouselSlide();
-      }
-    };
-
-    window.carouselNext = function() {
-      if (carouselCurrentSlide < 2) {
-        carouselCurrentSlide++;
-        updateCarouselSlide();
-      }
-    };
-
-    window.carouselGo = function(index) {
-      carouselCurrentSlide = index;
-      updateCarouselSlide();
-    };
-
-    function updateCarouselSlide() {
-      var slides = document.querySelectorAll('.mockup-slide');
-      var dots = document.querySelectorAll('.carousel-dot');
-      var prevBtn = document.querySelector('.carousel-prev');
-      var nextBtn = document.querySelector('.carousel-next');
-
-      // Hide all slides
-      for (var i = 0; i < slides.length; i++) {
-        slides[i].classList.remove('active');
-      }
-
-      // Show current slide
-      if (slides[carouselCurrentSlide]) {
-        slides[carouselCurrentSlide].classList.add('active');
-      }
-
-      // Update dots
-      for (var i = 0; i < dots.length; i++) {
-        if (i === carouselCurrentSlide) {
-          dots[i].classList.add('active');
-        } else {
-          dots[i].classList.remove('active');
-        }
-      }
-
-      // Update buttons
-      if (prevBtn) prevBtn.disabled = carouselCurrentSlide === 0;
-      if (nextBtn) nextBtn.disabled = carouselCurrentSlide === 2;
-
-      // Scroll to carousel
-      var carousel = document.querySelector('.mockup-carousel-wrapper');
-      if (carousel) {
-        carousel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }
-
-    // Initialize on load
-    window.addEventListener('load', function() {
-      setTimeout(updateCarouselSlide, 100);
+    // ========== SWIPER CAROUSEL INITIALIZATION ==========
+    const mockupSwiper = new Swiper('.mockupSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: false,
+      speed: 600,
+      effect: 'slide',
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: false,
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      grabCursor: true,
+      touchRatio: 1,
+      touchAngle: 45,
+      simulateTouch: true,
     });
 
     // ========== GAP TABS FUNCTIONALITY ==========
