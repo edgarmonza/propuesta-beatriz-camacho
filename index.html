@@ -28,14 +28,10 @@
   <link href="https://api.fontshare.com/v2/css?f[]=telegraf@700,600,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
-  <!-- Swiper Carousel -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
   <!-- GSAP Animation Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <style>
     /* ========== CSS VARIABLES - MONZA LAB BRAND ========== */
@@ -302,19 +298,15 @@
       }
     }
 
-    /* ========== SWIPER CAROUSEL CUSTOM STYLES ========== */
-    .mockup-carousel-wrapper {
+    /* ========== MOCKUPS VERTICAL STYLES ========== */
+    .mockups-vertical-wrapper {
       margin: 4rem 0;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
     }
 
-    .swiper {
-      width: 100%;
-      height: auto;
-      padding-bottom: 3rem;
-    }
-
-    .swiper-slide {
+    .mockup-item {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -331,56 +323,6 @@
       height: auto;
       border-radius: 8px;
       border: 1px solid var(--color-border);
-    }
-
-    /* Custom Navigation Buttons */
-    .swiper-button-prev,
-    .swiper-button-next {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--color-bg-secondary);
-      border: 1px solid var(--color-border);
-      color: var(--color-text-primary) !important;
-      transition: all 0.3s;
-    }
-
-    .swiper-button-prev:after,
-    .swiper-button-next:after {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .swiper-button-prev:hover,
-    .swiper-button-next:hover {
-      background: var(--color-accent);
-      color: var(--color-bg-primary) !important;
-      border-color: var(--color-accent);
-      transform: scale(1.1);
-    }
-
-    .swiper-button-disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    /* Custom Pagination */
-    .swiper-pagination {
-      bottom: 0 !important;
-    }
-
-    .swiper-pagination-bullet {
-      width: 8px;
-      height: 8px;
-      background: var(--color-border);
-      opacity: 1;
-      transition: all 0.3s;
-    }
-
-    .swiper-pagination-bullet-active {
-      width: 32px;
-      border-radius: 4px;
-      background: var(--color-accent);
     }
 
     .mockup-caption {
@@ -1210,56 +1152,45 @@
       Tu nueva presencia digital no es un template. Es una experiencia inmersiva que cuenta la historia de 30+ años de trayectoria, Milan Fashion Week, y Saks Fifth Avenue. Un sitio web que refleja el nivel de lujo y sofisticación de tus piezas.
     </p>
 
-    <!-- Swiper Carousel -->
-    <div class="mockup-carousel-wrapper">
-      <div class="swiper mockupSwiper">
-        <div class="swiper-wrapper">
-          <!-- Slide 1: Homepage -->
-          <div class="swiper-slide">
-            <div class="mockup-container">
-              <img src="assets/screenshots/screenshot-homepage.jpg" alt="Homepage Beatriz Camacho - Feminidad Etérea" loading="lazy">
-            </div>
-            <div class="mockup-caption">
-              <p class="mockup-caption-title">Primera impresión que deja huella.</p>
-              <p class="mockup-caption-text">
-                Una experiencia digital que comunica <strong>lujo tranquilo</strong> y <strong>feminidad consciente</strong>. Diseñada 100% a tu medida, tan única como tus piezas.
-              </p>
-            </div>
-          </div>
-
-          <!-- Slide 2: Tienda -->
-          <div class="swiper-slide">
-            <div class="mockup-container">
-              <img src="assets/screenshots/screenshot-tienda.jpg" alt="Tienda Beatriz Camacho" loading="lazy">
-            </div>
-            <div class="mockup-caption">
-              <p class="mockup-caption-title">El e-commerce que no se siente como e-commerce.</p>
-              <p class="mockup-caption-text">
-                Una <strong>galería editorial</strong> donde cada prenda cuenta una historia. Navegación intuitiva, experiencia sofisticada. Como hojear una revista de moda de lujo.
-              </p>
-            </div>
-          </div>
-
-          <!-- Slide 3: Producto -->
-          <div class="swiper-slide">
-            <div class="mockup-container">
-              <img src="assets/screenshots/screenshot-producto.jpg" alt="Página de Producto Beatriz Camacho" loading="lazy">
-            </div>
-            <div class="mockup-caption">
-              <p class="mockup-caption-title">Tus prendas merecen más que un "Add to Cart".</p>
-              <p class="mockup-caption-text">
-                Aquí tu historia cobra vida. <strong>Conexión emocional</strong>, no solo transacciones. Cada elemento diseñado para comunicar: <strong>moda con alma</strong>, hecha para perdurar.
-              </p>
-            </div>
-          </div>
+    <!-- Screenshots en Vertical -->
+    <div class="mockups-vertical-wrapper">
+      <!-- Screenshot 1: Homepage -->
+      <div class="mockup-item">
+        <div class="mockup-container">
+          <img src="assets/screenshots/screenshot-homepage.jpg" alt="Homepage Beatriz Camacho - Feminidad Etérea" loading="lazy">
         </div>
+        <div class="mockup-caption">
+          <p class="mockup-caption-title">Primera impresión que deja huella.</p>
+          <p class="mockup-caption-text">
+            Una experiencia digital que comunica <strong>lujo tranquilo</strong> y <strong>feminidad consciente</strong>. Diseñada 100% a tu medida, tan única como tus piezas.
+          </p>
+        </div>
+      </div>
 
-        <!-- Navigation Buttons -->
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+      <!-- Screenshot 2: Tienda -->
+      <div class="mockup-item">
+        <div class="mockup-container">
+          <img src="assets/screenshots/screenshot-tienda.jpg" alt="Tienda Beatriz Camacho" loading="lazy">
+        </div>
+        <div class="mockup-caption">
+          <p class="mockup-caption-title">El e-commerce que no se siente como e-commerce.</p>
+          <p class="mockup-caption-text">
+            Una <strong>galería editorial</strong> donde cada prenda cuenta una historia. Navegación intuitiva, experiencia sofisticada. Como hojear una revista de moda de lujo.
+          </p>
+        </div>
+      </div>
 
-        <!-- Pagination -->
-        <div class="swiper-pagination"></div>
+      <!-- Screenshot 3: Producto -->
+      <div class="mockup-item">
+        <div class="mockup-container">
+          <img src="assets/screenshots/screenshot-producto.jpg" alt="Página de Producto Beatriz Camacho" loading="lazy">
+        </div>
+        <div class="mockup-caption">
+          <p class="mockup-caption-title">Tus prendas merecen más que un "Add to Cart".</p>
+          <p class="mockup-caption-text">
+            Aquí tu historia cobra vida. <strong>Conexión emocional</strong>, no solo transacciones. Cada elemento diseñado para comunicar: <strong>moda con alma</strong>, hecha para perdurar.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -2010,38 +1941,6 @@
 
     })();
 
-    // ========== SWIPER CAROUSEL INITIALIZATION ==========
-    document.addEventListener('DOMContentLoaded', function() {
-      const mockupSwiper = new Swiper('.mockupSwiper', {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: false,
-        speed: 600,
-        effect: 'slide',
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          dynamicBullets: false,
-        },
-        keyboard: {
-          enabled: true,
-          onlyInViewport: true,
-        },
-        grabCursor: true,
-        touchRatio: 1,
-        touchAngle: 45,
-        simulateTouch: true,
-        on: {
-          init: function() {
-            console.log('Swiper initialized with ' + this.slides.length + ' slides');
-          }
-        }
-      });
-    });
 
     // ========== GAP TABS FUNCTIONALITY ==========
     (function() {
