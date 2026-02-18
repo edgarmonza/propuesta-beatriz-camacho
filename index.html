@@ -2014,13 +2014,18 @@
     // ========== MOCKUP CAROUSEL WITH DRAG SUPPORT ==========
     (function() {
       const carousel = document.getElementById('mockupCarousel');
-      if (!carousel) return;
+      if (!carousel) {
+        console.log('Carousel not found');
+        return;
+      }
 
       const track = carousel.querySelector('.mockup-carousel-track');
       const slides = Array.from(track.querySelectorAll('.mockup-slide'));
       const prevBtn = document.querySelector('.carousel-prev');
       const nextBtn = document.querySelector('.carousel-next');
       const dots = document.querySelectorAll('.carousel-dot');
+
+      console.log('Carousel initialized:', { slides: slides.length, prevBtn: !!prevBtn, nextBtn: !!nextBtn, dots: dots.length });
 
       let currentIndex = 0;
       let isDragging = false;
@@ -2031,29 +2036,53 @@
       function updateCarousel() {
         const offset = -currentIndex * 100;
         track.style.transform = `translateX(${offset}%)`;
+        console.log('Updating carousel to slide:', currentIndex, 'offset:', offset);
 
         // Update dots
         dots.forEach((dot, index) => {
           dot.classList.toggle('active', index === currentIndex);
         });
 
-        // Update buttons
-        if (prevBtn) prevBtn.disabled = currentIndex === 0;
-        if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
+        // Update buttons - don't disable, just change opacity
+        if (prevBtn) {
+          prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+          prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+        }
+        if (nextBtn) {
+          nextBtn.style.opacity = currentIndex === slides.length - 1 ? '0.3' : '1';
+          nextBtn.style.pointerEvents = currentIndex === slides.length - 1 ? 'none' : 'auto';
+        }
       }
 
       function goToSlide(index) {
         currentIndex = Math.max(0, Math.min(index, slides.length - 1));
+        console.log('Going to slide:', currentIndex);
         updateCarousel();
       }
 
       // Button navigation
-      if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-      if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          console.log('Prev clicked, current:', currentIndex);
+          goToSlide(currentIndex - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          console.log('Next clicked, current:', currentIndex);
+          goToSlide(currentIndex + 1);
+        });
+      }
 
       // Dot navigation
       dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
+        dot.addEventListener('click', () => {
+          console.log('Dot clicked:', index);
+          goToSlide(index);
+        });
       });
 
       // Drag functionality
@@ -2064,29 +2093,40 @@
       function dragStart(event) {
         isDragging = true;
         startPos = getPositionX(event);
+        currentTranslate = prevTranslate;
         carousel.style.cursor = 'grabbing';
       }
 
       function drag(event) {
         if (!isDragging) return;
+        event.preventDefault();
         const currentPosition = getPositionX(event);
-        currentTranslate = prevTranslate + currentPosition - startPos;
+        const diff = currentPosition - startPos;
+        currentTranslate = prevTranslate + diff;
+
+        // Apply temporary transform while dragging
+        const slideWidth = carousel.offsetWidth;
+        const translatePercent = (currentTranslate / slideWidth) * 100;
+        track.style.transform = `translateX(calc(${-currentIndex * 100}% + ${translatePercent}%))`;
       }
 
       function dragEnd() {
+        if (!isDragging) return;
         isDragging = false;
         carousel.style.cursor = 'grab';
 
         const movedBy = currentTranslate - prevTranslate;
+        const slideWidth = carousel.offsetWidth;
 
-        // If moved enough, go to next/prev slide
-        if (movedBy < -100 && currentIndex < slides.length - 1) {
+        // If moved more than 20% of slide width, change slide
+        if (movedBy < -slideWidth * 0.2 && currentIndex < slides.length - 1) {
           currentIndex++;
-        } else if (movedBy > 100 && currentIndex > 0) {
+        } else if (movedBy > slideWidth * 0.2 && currentIndex > 0) {
           currentIndex--;
         }
 
-        prevTranslate = currentTranslate;
+        prevTranslate = -currentIndex * slideWidth;
+        currentTranslate = prevTranslate;
         updateCarousel();
       }
 
@@ -2097,8 +2137,8 @@
       carousel.addEventListener('mouseleave', dragEnd);
 
       // Touch events
-      carousel.addEventListener('touchstart', dragStart, { passive: true });
-      carousel.addEventListener('touchmove', drag, { passive: true });
+      carousel.addEventListener('touchstart', dragStart, { passive: false });
+      carousel.addEventListener('touchmove', drag, { passive: false });
       carousel.addEventListener('touchend', dragEnd);
 
       // Keyboard navigation
@@ -2109,6 +2149,7 @@
 
       // Initialize
       updateCarousel();
+      console.log('Carousel ready');
     })();
 
     // ========== GAP TABS FUNCTIONALITY ==========
