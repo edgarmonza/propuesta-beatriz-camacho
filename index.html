@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="https://www.monzalab.com/favicon.png">
+  <title>Beatriz Camacho x Monza Lab | Propuesta Tienda Online de Lujo</title>
+  <meta name="description" content="Propuesta comercial para crear tu tienda online de lujo. Experiencia de compra premium que refleja 30 años de excelencia caribeña.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=telegraf@700,600,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- GSAP Animation Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <style>
+    /* ========== CSS VARIABLES - MONZA LAB BRAND ========== */
+    :root {
+      /* Colors */
+      --color-bg-primary: #0b0b10;
+      --color-bg-secondary: #0a0a0f;
+      --color-accent: #F8B4D9;
+      --color-accent-hover: #f4cbde;
+      --color-text-primary: #FFFCF7;
+      --color-text-secondary: #C9CCD3;
+      --color-text-muted: rgba(255, 252, 247, 0.7);
+      --color-text-dim: rgba(255, 252, 247, 0.4);
+      --color-border: rgba(255, 255, 255, 0.1);
+      --color-border-hover: rgba(255, 255, 255, 0.2);
+
+      /* Fonts */
+      --font-display: 'Telegraf', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-body: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+      /* Spacing */
+      --spacing-section: clamp(4rem, 10vw, 8rem);
+      --max-width: 1120px;
+    }
+
+    /* ========== RESET & BASE ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ========== BACKGROUND LAYERS ========== */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-gradient-1 {
+      background: radial-gradient(80% 50% at 50% 0%, rgba(248, 180, 217, 0.12) 0%, transparent 60%);
+    }
+
+    .bg-gradient-2 {
+      background: radial-gradient(60% 40% at 50% 30%, rgba(120, 100, 140, 0.04) 0%, transparent 50%);
+    }
+
+    .bg-noise {
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ========== NAVIGATION ========== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+      background: transparent;
+    }
+
+    .nav.scrolled {
+      background: rgba(11, 11, 16, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      height: 32px;
+      width: auto;
+      transition: opacity 0.2s;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.8;
+    }
+
+    .nav-cta {
+      padding: 0.5rem 1.5rem;
+      background: var(--color-accent);
+      color: var(--color-bg-primary);
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      box-shadow: 0 0 16px -2px rgba(248, 180, 217, 0.4);
+    }
+
+    .nav-cta:hover {
+      background: var(--color-accent-hover);
+      box-shadow: 0 8px 24px -4px rgba(248, 180, 217, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* ========== NAVIGATION LINKS ========== */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--color-accent);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-accent);
+      transition: width 0.3s;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Progress Bar */
+    .nav-progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
+      transition: width 0.1s linear;
+    }
+
+    /* Mobile Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      z-index: 101;
+    }
+
+    .nav-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-text-primary);
+      transition: all 0.3s;
+    }
+
+    .nav-hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Mobile Menu */
+    .nav-mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: var(--color-bg-primary);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .nav-mobile-menu.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav-mobile-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 2rem;
+    }
+
+    .nav-mobile-link {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-mobile-link:hover {
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+    }
+
+    /* ========== HORIZONTAL CAROUSEL ========== */
+    .mockup-carousel-wrapper {
+      margin: 4rem 0;
+      position: relative;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .carousel-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-btn:hover:not(:disabled) {
+      background: var(--color-accent);
+      color: var(--color-bg-primary);
+      border-color: var(--color-accent);
+      transform: scale(1.1);
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .carousel-dot.active {
+      width: 32px;
+      border-radius: 4px;
+      background: var(--color-accent);
+    }
+
+    .mockup-carousel {
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .mockup-carousel:active {
+      cursor: grabbing;
+    }
+
+    .mockup-carousel-track {
+      display: flex;
+      gap: 2rem;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .mockup-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+    }
+
+    .mockup-caption {
+      max-width: 800px;
+      margin: 2rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .mockup-caption-title {
+      color: var(--color-accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .mockup-caption-text {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .carousel-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      color: var(--color-text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeInOut 3s infinite;
+    }
+
+    .carousel-hint svg {
+      animation: slideHint 2s infinite;
+    }
+
+    @keyframes slideHint {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .carousel-controls {
+        gap: 1rem;
+      }
+
+      .carousel-btn {
+        width: 40px;
+        height: 40px;
+      }
+
+      .mockup-carousel-track {
+        gap: 1rem;
+      }
+    }
+
+    /* ========== TABS INTERFACE ========== */
+    .gap-tabs-wrapper {
+      margin-top: 3rem;
+    }
+
+    .gap-tabs-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .gap-tab-btn {
+      padding: 1rem 2rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
+      color: var(--color-text-muted);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .gap-tab-btn:hover {
+      border-color: var(--color-border-hover);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .gap-tab-btn.active {
+      background: var(--color-accent);
+      color: var(--color-bg-primary);
+      border-color: var(--color-accent);
+    }
+
+    .gap-tabs-content {
+      position: relative;
+      min-height: 400px;
+    }
+
+    .gap-tab-panel {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      transition: opacity 0.3s;
+    }
+
+    .gap-tab-panel.active {
+      opacity: 1;
+      pointer-events: all;
+      position: relative;
+    }
+
+    .gap-card-full {
+      padding: 2.5rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .gap-list-full {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .gap-list-full li {
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--color-text-muted);
+    }
+
+    .gap-list-full li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .gap-tabs-controls {
+        flex-direction: column;
+      }
+
+      .gap-tab-btn {
+        width: 100%;
+      }
+    }
+
+    /* ========== ACCORDION ========== */
+    .deliverables-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .accordion-section {
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--color-bg-secondary);
+    }
+
+    .accordion-header {
+      width: 100%;
+      padding: 1.5rem 2rem;
+      background: transparent;
+      border: none;
+      color: var(--color-text-primary);
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s;
+      text-align: left;
+    }
+
+    .accordion-header:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .accordion-header span:nth-child(2) {
+      flex: 1;
+    }
+
+    .accordion-arrow {
+      transition: transform 0.3s;
+      color: var(--color-text-dim);
+    }
+
+    .accordion-section.active .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .accordion-section.active .accordion-content {
+      max-height: 2000px;
+    }
+
+    .accordion-content .deliverable-item {
+      margin: 0 2rem 1rem 2rem;
+      padding: 1.5rem;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: 0.75rem;
+    }
+
+    .accordion-content .deliverable-item:last-child {
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .accordion-header {
+        font-size: 1rem;
+        padding: 1.25rem 1.5rem;
+      }
+    }
+
+    /* ========== SECTION BASE ========== */
+    .section {
+      position: relative;
+      z-index: 10;
+      padding: var(--spacing-section) 2rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-full {
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    /* ========== TYPOGRAPHY ========== */
+    .eyebrow {
+      font-size: 0.625rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .section-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+    }
+
+    .display-1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.125rem, 5vw, 3.75rem);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .display-2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 4.25vw, 3rem);
+      line-height: 1.15;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .body-large {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      line-height: 1.7;
+      color: var(--color-text-muted);
+    }
+
+    .accent-text {
+      color: var(--color-accent);
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 8rem;
+      padding-bottom: 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(60% 40% at 50% 20%, rgba(248, 180, 217, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 0.875rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.125rem, 6vw, 4.25rem);
+      line-height: 1.08;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-description {
+      font-size: clamp(0.9rem, 1.8vw, 1.125rem);
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--color-accent);
+      color: var(--color-bg-primary);
+      border-radius: 9999px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      box-shadow: 0 6px 24px -6px rgba(248, 180, 217, 0.3);
+    }
+
+    .hero-cta:hover {
+      background: var(--color-accent-hover);
+      box-shadow: 0 8px 32px -6px rgba(248, 180, 217, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      margin-top: 4rem;
+      color: var(--color-text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    /* ========== SECTION 01: FUTURE REALITY ========== */
+    .future-reality {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--spacing-section);
+    }
+
+    .mockup-container {
+      margin: 4rem 0;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .mockup-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ========== SECTION 02: THE GAP ========== */
+    .gap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .gap-card {
+      padding: 2.5rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      transition: all 0.3s;
+    }
+
+    .gap-card:hover {
+      border-color: var(--color-border-hover);
+      box-shadow: 0 10px 40px -10px rgba(248, 180, 217, 0.15);
+    }
+
+    .gap-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-text-primary);
+    }
+
+    .gap-card ul {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .gap-card li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .gap-card li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--color-text-dim);
+    }
+
+    /* ========== SECTION 03: ROADMAP ========== */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .phase-card {
+      padding: 2.5rem 2rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 1rem;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .phase-card:hover {
+      border-color: var(--color-accent);
+      box-shadow: 0 10px 40px -10px rgba(248, 180, 217, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .phase-number {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .phase-title {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-primary);
+    }
+
+    .phase-timeline {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .phase-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .phase-list li {
+      padding-left: 1.25rem;
+      position: relative;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+
+    .phase-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* ========== SECTION 04: DELIVERABLES ========== */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .deliverable-column h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .icon-check {
+      color: #4ade80;
+    }
+
+    .icon-x {
+      color: #f87171;
+    }
+
+    .deliverable-item {
+      padding: 1.5rem;
+      background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+      transition: all 0.2s;
+    }
+
+    .deliverable-item:hover {
+      border-color: var(--color-border-hover);
+    }
+
+    .deliverable-item h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-text-primary);
+    }
+
+    .deliverable-item p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* ========== SECTION 05: INVESTMENT ========== */
+    .investment-card {
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 3rem;
+      background: linear-gradient(135deg, rgba(248, 180, 217, 0.05) 0%, rgba(120, 100, 140, 0.05) 100%);
+      border: 1px solid var(--color-accent);
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 20px 60px -10px rgba(248, 180, 217, 0.2);
+    }
+
+    .investment-amount {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 4.25rem);
+      font-weight: 700;
+      color: var(--color-accent);
+      margin: 1rem 0;
+      letter-spacing: -0.02em;
+    }
+
+    .investment-breakdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .payment-item {
+      text-align: center;
+    }
+
+    .payment-item .percentage {
+      font-family: var(--font-display);
+      font-size: 2.125rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      display: block;
+    }
+
+    .payment-item .amount {
+      font-size: 1.125rem;
+      color: var(--color-accent);
+      display: block;
+      margin: 0.5rem 0;
+    }
+
+    .payment-item .label {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ========== SECTION 06: THE STUDIO ========== */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .studio-image {
+      width: 100%;
+      border-radius: 1rem;
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    .studio-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(20%);
+    }
+
+    .studio-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-text-primary);
+    }
+
+    .studio-features {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .studio-features li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .studio-features li:last-child {
+      border-bottom: none;
+    }
+
+    .studio-features li::before {
+      content: '→';
+      color: var(--color-accent);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* ========== FOOTER CTA ========== */
+    .footer-cta {
+      text-align: center;
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .footer-cta .display-2 {
+      margin-bottom: 2rem;
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .gap-grid,
+      .deliverables-grid,
+      .investment-breakdown {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .studio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-container {
+        padding: 1rem 1.5rem;
+      }
+
+      .section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Layers -->
+  <div class="bg-layer bg-gradient-1"></div>
+  <div class="bg-layer bg-gradient-2"></div>
+  <div class="bg-layer bg-noise"></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-container">
+      <a href="https://www.monzalab.com">
+        <img src="https://www.monzalab.com/logo-crema.png" alt="Monza Lab" class="nav-logo">
+      </a>
+
+      <!-- Navigation Links -->
+      <div class="nav-links">
+        <a href="#future-reality" class="nav-link" data-section="1">Future Reality</a>
+        <a href="#heritage-gap" class="nav-link" data-section="2">The Gap</a>
+        <a href="#roadmap" class="nav-link" data-section="3">Roadmap</a>
+        <a href="#deliverables" class="nav-link" data-section="4">Deliverables</a>
+        <a href="#investment" class="nav-link" data-section="5">Investment</a>
+        <a href="#contact" class="nav-link" data-section="6">Contact</a>
+      </div>
+
+      <a href="#contact" class="nav-cta">Activar Monza</a>
+
+      <!-- Mobile Hamburger -->
+      <button class="nav-hamburger" id="navHamburger" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="nav-progress-bar">
+      <div class="nav-progress-fill"></div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <div class="nav-mobile-content">
+      <a href="#future-reality" class="nav-mobile-link">01 / Future Reality</a>
+      <a href="#heritage-gap" class="nav-mobile-link">02 / The Gap</a>
+      <a href="#roadmap" class="nav-mobile-link">03 / Roadmap</a>
+      <a href="#deliverables" class="nav-mobile-link">04 / Deliverables</a>
+      <a href="#investment" class="nav-mobile-link">05 / Investment</a>
+      <a href="#the-studio" class="nav-mobile-link">06 / The Studio</a>
+      <a href="#contact" class="nav-mobile-link">Contact</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero section">
+    <div class="hero-content">
+      <p class="hero-subtitle">Propuesta Comercial — Febrero 2026</p>
+      <h1 class="hero-title">
+        Beatriz Camacho<br>
+        <span class="accent-text">Tu Nueva Tienda de Lujo Online</span>
+      </h1>
+      <p class="hero-description">
+        De diseño estático a tienda funcionando. Transformamos tu presencia digital en una experiencia de compra de lujo que refleja 30 años de excelencia caribeña.
+      </p>
+      <a href="#future-reality" class="hero-cta">Ver Propuesta</a>
+      <div class="hero-scroll">Scroll ↓</div>
+    </div>
+  </section>
+
+  <!-- SECTION 01: FUTURE REALITY -->
+  <section id="future-reality" class="section future-reality">
+    <p class="section-number">01 / 06</p>
+    <p class="eyebrow">Future Reality</p>
+    <h2 class="display-1">
+      El E-commerce que Grita<br>
+      <span class="accent-text">Lujo Caribeño</span>
+    </h2>
+    <p class="body-large">
+      Tu nueva presencia digital no es un template. Es una experiencia inmersiva que cuenta la historia de 30+ años de trayectoria, Milan Fashion Week, y Saks Fifth Avenue. Un sitio web que refleja el nivel de lujo y sofisticación de tus piezas.
+    </p>
+
+    <!-- Horizontal Scroll Carousel -->
+    <div class="mockup-carousel-wrapper">
+      <div class="carousel-controls">
+        <button class="carousel-btn carousel-prev" aria-label="Previous">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        <div class="carousel-indicators">
+          <span class="carousel-dot active" data-index="0"></span>
+          <span class="carousel-dot" data-index="1"></span>
+          <span class="carousel-dot" data-index="2"></span>
+        </div>
+        <button class="carousel-btn carousel-next" aria-label="Next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="mockup-carousel" id="mockupCarousel">
+        <div class="mockup-carousel-track">
+          <!-- Slide 1: Homepage -->
+          <div class="mockup-slide">
+            <div class="mockup-container">
+              <img src="assets/screenshots/screenshot-homepage.jpg" alt="Homepage Beatriz Camacho - Feminidad Etérea" loading="lazy">
+            </div>
+            <div class="mockup-caption">
+              <p class="mockup-caption-title">Primera impresión que deja huella.</p>
+              <p class="mockup-caption-text">
+                Cuando una clienta llega a tu sitio, no ve un catálogo — experimenta una <strong>filosofía</strong>. La tipografía serif delicada, el espacio en blanco generoso y la fotografía artística no son accidentales: cada pixel está diseñado para comunicar <em>lujo tranquilo</em> y <em>feminidad consciente</em>. No hay distracciones. No hay pop-ups agresivos. Solo tu voz, tu estética, y una invitación sutil a explorar. <strong>Esto no es un template de Shopify</strong> — es una experiencia digital diseñada 100% a tu medida, tan única como tus piezas.
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 2: Tienda -->
+          <div class="mockup-slide">
+            <div class="mockup-container">
+              <img src="assets/screenshots/screenshot-tienda.jpg" alt="Tienda Beatriz Camacho" loading="lazy">
+            </div>
+            <div class="mockup-caption">
+              <p class="mockup-caption-title">El e-commerce que no se siente como e-commerce.</p>
+              <p class="mockup-caption-text">
+                En lugar de una cuadrícula fría de productos, tus clientas encuentran una <strong>galería editorial</strong>: cada prenda fotografiada en el Caribe que las inspira, cada nombre (<em>Vestido Índigo Atardecer</em>, <em>Set Acuarela Caribe</em>) contando una micro-historia. La navegación es intuitiva pero sofisticada. Los filtros están ahí cuando los necesitas, invisibles cuando no. El resultado: una experiencia de compra que se siente como hojear una revista de moda de lujo, no como agregar items a un carrito. <strong>Cada detalle refleja tu ADN de marca.</strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- Slide 3: Producto -->
+          <div class="mockup-slide">
+            <div class="mockup-container">
+              <img src="assets/screenshots/screenshot-producto.jpg" alt="Página de Producto Beatriz Camacho" loading="lazy">
+            </div>
+            <div class="mockup-caption">
+              <p class="mockup-caption-title">Tus prendas merecen más que un "Add to Cart".</p>
+              <p class="mockup-caption-text">
+                Aquí es donde tu historia cobra vida. La sección <em>"Nacida del Caribe, Hecha para el Mundo"</em> no es marketing — es <strong>conexión emocional</strong>. Tus clientas no solo ven una prenda; entienden de dónde viene, quién la hizo, por qué importa. La fotografía ocupa espacio (como debe ser). El texto es generoso pero nunca abrumador. Cada elemento de la página — desde la tipografía hasta el botón de WhatsApp — trabaja para comunicar que esto no es moda rápida. Es <strong>moda con alma</strong>, diseñada para perdurar. <strong>Esta página fue diseñada específicamente para contar tu historia</strong>, no adaptada de un tema genérico.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-hint">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        <span>Arrastra o usa las flechas para navegar</span>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER MEJORADO -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <div style="padding: 2rem; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 1rem; max-width: 700px; margin: 0 auto;">
+        <p style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 1rem;">
+          ⚠️ Importante
+        </p>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.7;">
+          <strong style="color: var(--color-text-primary);">Esta es una propuesta visual inicial.</strong> El diseño final se construye de forma iterativa contigo, ajustando cada detalle hasta lograr la visión perfecta.
+        </p>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.7; margin-top: 1rem;">
+          <strong style="color: var(--color-text-primary);">La Fase 1 incluye:</strong> Integración completa con Shopify, pasarelas de pago, migración SEO, capacitación del equipo, y refinamiento iterativo del diseño según tus requerimientos.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border);">
+          <div>
+            <p style="font-size: 0.875rem; color: var(--color-accent); font-weight: 600; margin-bottom: 0.25rem;">6 Páginas</p>
+            <p style="font-size: 0.8rem; color: var(--color-text-dim);">Homepage, Tienda, Producto, Nosotros, Atelier, Contacto</p>
+          </div>
+          <div>
+            <p style="font-size: 0.875rem; color: var(--color-accent); font-weight: 600; margin-bottom: 0.25rem;">Responsive</p>
+            <p style="font-size: 0.8rem; color: var(--color-text-dim);">Desktop, Tablet, Mobile optimizado</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 02: THE DIGITAL OPPORTUNITY -->
+  <section id="heritage-gap" class="section">
+    <p class="section-number">02 / 06</p>
+    <p class="eyebrow">The Digital Opportunity</p>
+    <h2 class="display-1">
+      La Oportunidad:<br>
+      <span class="accent-text">Tu Próximo Capítulo Digital</span>
+    </h2>
+    <p class="body-large" style="max-width: 700px;">
+      30 años de excelencia offline listos para brillar online. Tienes todo lo necesario para dominar el mercado digital de lujo.
+    </p>
+
+    <div class="gap-tabs-wrapper">
+      <div class="gap-tabs-controls">
+        <button class="gap-tab-btn active" data-tab="advantages">✓ Tu Fundación Sólida</button>
+        <button class="gap-tab-btn" data-tab="gaps">→ Tu Potencial Digital</button>
+      </div>
+
+      <div class="gap-tabs-content">
+        <!-- Tab 1: Advantages -->
+        <div class="gap-tab-panel active" id="tab-advantages">
+          <div class="gap-card-full">
+            <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+              Tu ventaja competitiva es innegable:
+            </p>
+            <ul class="gap-list-full">
+              <li>30+ años de trayectoria (desde 1993)</li>
+              <li>2 Premios Cromos de la Moda (2008, 2017)</li>
+              <li>Milan Fashion Week 2009</li>
+              <li>Distribuida en Saks Fifth Avenue</li>
+              <li>50+ artesanos en Barranquilla</li>
+              <li>Formación en Boston + Roma</li>
+              <li>Heritage caribeño único</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tab 2: Digital Potential -->
+        <div class="gap-tab-panel" id="tab-gaps">
+          <div class="gap-card-full">
+            <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+              Lo que vamos a activar digitalmente:
+            </p>
+            <ul class="gap-list-full">
+              <li>Comunicar el nivel de lujo y sofisticación de tus piezas</li>
+              <li>Contar el storytelling de 30 años de historia visualmente</li>
+              <li>Posicionarte claramente por encima de marcas colombianas</li>
+              <li>Capturar clientas premium que compran online</li>
+              <li>Crear una experiencia e-commerce a la altura de tu trabajo</li>
+              <li>Alcanzar el posicionamiento internacional que mereces</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 700px; margin: 3rem auto; text-align: center;">
+      <p class="body-large">
+        <strong>El Momento:</strong> Tienes todo lo necesario para triunfar online. Ahora vamos a amplificar digitalmente tu excelencia para que tu clienta ideal te encuentre, compre, y viva la experiencia inmersiva que tu trabajo merece.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 03: THE TRANSFORMATION ROADMAP -->
+  <section id="roadmap" class="section">
+    <p class="section-number">03 / 06</p>
+    <p class="eyebrow">El Plan de Trabajo</p>
+    <h2 class="display-1">
+      De Diseño Estático a<br>
+      <span class="accent-text">Tienda Online Funcionando</span>
+    </h2>
+    <p class="body-large" style="max-width: 700px; margin-bottom: 3rem;">
+      6 semanas. Tu diseño nuevo conectado a tu tienda Shopify actual, sin perder tu posicionamiento en Google ni tus productos.
+    </p>
+
+    <div class="roadmap-grid">
+      <!-- Phase 1 -->
+      <div class="phase-card">
+        <div class="phase-number">1</div>
+        <p class="phase-timeline">Semana 1-2</p>
+        <h3 class="phase-title">Instalación y Conexión Inicial</h3>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+          Llevamos tu diseño nuevo a tu tienda Shopify y lo dejamos funcionando.
+        </p>
+        <ul class="phase-list">
+          <li>Revisión de tu tienda actual</li>
+          <li>Instalación del diseño nuevo en Shopify</li>
+          <li>Activación de animaciones suaves y profesionales</li>
+          <li>Página de inicio funcionando en modo prueba</li>
+        </ul>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-card">
+        <div class="phase-number">2</div>
+        <p class="phase-timeline">Semana 3-4</p>
+        <h3 class="phase-title">Conexión de Productos y Tienda</h3>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+          Conectamos todos tus productos, colecciones y proceso de compra.
+        </p>
+        <ul class="phase-list">
+          <li>Páginas de colecciones que se actualizan solas</li>
+          <li>Fichas de producto con tallas, colores y opciones</li>
+          <li>Carrito de compras y proceso de pago conectados</li>
+          <li>Traslado de tus productos actuales al diseño nuevo</li>
+        </ul>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-card">
+        <div class="phase-number">3</div>
+        <p class="phase-timeline">Semana 5-6</p>
+        <h3 class="phase-title">Optimización y Lanzamiento Público</h3>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+          Mantenemos tu posicionamiento en Google, optimizamos velocidad y lanzamos.
+        </p>
+        <ul class="phase-list">
+          <li>Redirecciones para mantener tu posicionamiento en Google</li>
+          <li>Instalación de medición de visitas (Google + Instagram/Facebook)</li>
+          <li>Optimización de velocidad de carga</li>
+          <li>Capacitación + Lanzamiento Público 🚀</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <p style="color: var(--color-text-muted); font-size: 1rem;">
+        <strong>Resultado:</strong> Tu tienda nueva funcionando en vivo, sin perder posicionamiento en Google, y tú sabiendo cómo manejarla.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 04: ENTREGABLES TANGIBLES -->
+  <section id="deliverables" class="section">
+    <p class="section-number">04 / 06</p>
+    <p class="eyebrow">Entregables Tangibles</p>
+    <h2 class="display-1">
+      Qué Incluye.<br>
+      <span class="accent-text">Qué No Incluye.</span>
+    </h2>
+    <p class="body-large" style="max-width: 700px; margin-bottom: 3rem;">
+      Claridad total sobre el scope del proyecto. Sin sorpresas, sin ambigüedades.
+    </p>
+
+    <div class="deliverables-accordion">
+      <!-- Lo que Incluye -->
+      <div class="accordion-section active">
+        <button class="accordion-header" data-accordion="includes">
+          <span class="icon-check">✓</span>
+          <span>Lo que Incluye (6 entregables)</span>
+          <svg class="accordion-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="accordion-content" id="accordion-includes">
+          <div class="deliverable-item">
+            <h4>Diseño Instalado en Shopify</h4>
+            <p>Tu diseño nuevo instalado y funcionando en tu tienda Shopify.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Tienda Completa Conectada</h4>
+            <p>Todos tus productos, colecciones, carrito, proceso de compra y métodos de pago conectados.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Experiencia Visual de Lujo</h4>
+            <p>Diseño editorial de lujo con animaciones suaves al hacer scroll, efectos de profundidad y pantalla de carga elegante.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Mantenimiento de Posicionamiento en Google</h4>
+            <p>Configuración completa para que Google no pierda tu posicionamiento actual y tu tienda se siga encontrando.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Medición de Visitas y Ventas</h4>
+            <p>Medición de visitas y ventas configurada (Google + Instagram/Facebook) para que sepas qué funciona.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Capacitación y Acompañamiento</h4>
+            <p>2 sesiones donde te enseñamos a manejar todo + 30 días de ayuda después del lanzamiento.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lo que NO Incluye -->
+      <div class="accordion-section">
+        <button class="accordion-header" data-accordion="excludes">
+          <span class="icon-x">✗</span>
+          <span>Lo que No Incluye (6 exclusiones)</span>
+          <svg class="accordion-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="accordion-content" id="accordion-excludes">
+          <div class="deliverable-item">
+            <h4>Fotografía de Producto</h4>
+            <p>Usamos los assets existentes o los que el cliente provea. No incluye sesión fotográfica profesional.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Producción de Contenido</h4>
+            <p>No incluye producción de lookbooks, videos o contenido de marca adicional.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Community Management</h4>
+            <p>Gestión de redes sociales y pauta publicitaria no están incluidas en el proyecto.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>App Móvil Nativa</h4>
+            <p>El sitio es responsive, pero no incluye desarrollo de aplicación iOS/Android nativa.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Logística de Envíos</h4>
+            <p>No incluye gestión de inventario físico ni coordinación de envíos con courier.</p>
+          </div>
+          <div class="deliverable-item">
+            <h4>Integraciones ERP/CRM</h4>
+            <p>No incluye integración con sistemas externos de gestión empresarial.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 04.5: REFERENCIAS / NUESTRO TRABAJO -->
+  <section id="referencias" class="section" style="background: var(--color-bg-secondary);">
+    <p class="section-number">04.5 / 06</p>
+    <p class="eyebrow">Referencias Seleccionadas</p>
+    <h2 class="display-1">
+      Nuestro Trabajo.<br>
+      <span class="accent-text">Tu Confianza.</span>
+    </h2>
+
+    <p class="body-large" style="max-width: 700px; margin: 0 auto 4rem;">
+      Cada proyecto es único, pero todos comparten el mismo ADN: diseño excepcional, ejecución impecable, resultados medibles.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+
+      <!-- Proyecto 1: Pacho Álvarez Dakar -->
+      <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease;">
+        <div style="aspect-ratio: 16/10; overflow: hidden; border-bottom: 1px solid var(--color-border);">
+          <img src="assets/screenshots/ref-pacho.jpg" alt="Pacho Álvarez - Dakar Rally 2025" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+        </div>
+        <div style="padding: 1.5rem;">
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem;">Pacho Álvarez</h3>
+          <p style="color: var(--color-accent); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Dakar Rally 2025</p>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6;">
+            Sitio web inmersivo para piloto profesional del Rally Dakar. Storytelling visual, integración con redes sociales, experiencia mobile-first.
+          </p>
+          <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--color-text-dim);">
+            <a href="https://pacho-alvarez-dakar.vercel.app" target="_blank" style="color: var(--color-accent); text-decoration: none;">pacho-alvarez-dakar.vercel.app ↗</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Proyecto 2: Spectro Legends -->
+      <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease;">
+        <div style="aspect-ratio: 16/10; overflow: hidden; border-bottom: 1px solid var(--color-border);">
+          <img src="assets/screenshots/ref-spectro.jpg" alt="Spectro Legends - Sports Marketing" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+        </div>
+        <div style="padding: 1.5rem;">
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem;">Spectro Legends</h3>
+          <p style="color: var(--color-accent); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Sports Marketing</p>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6;">
+            Plataforma de narrativas deportivas. "We turn stars into legends" — Video hero, animaciones premium, diseño editorial sofisticado.
+          </p>
+          <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--color-text-dim);">
+            <a href="https://spectrolegends.monzalab.com" target="_blank" style="color: var(--color-accent); text-decoration: none;">spectrolegends.monzalab.com ↗</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Proyecto 3: Bavarian Econs -->
+      <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: 1rem; overflow: hidden; transition: transform 0.3s ease;">
+        <div style="aspect-ratio: 16/10; overflow: hidden; border-bottom: 1px solid var(--color-border);">
+          <img src="assets/screenshots/ref-bavarian.jpg" alt="Bavarian Econs - Premium Brand" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+        </div>
+        <div style="padding: 1.5rem;">
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem;">Bavarian Econs</h3>
+          <p style="color: var(--color-accent); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Premium Brand</p>
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6;">
+            Experiencia digital premium para marca de lujo. Diseño minimalista, tipografía sofisticada, atención al detalle obsesiva.
+          </p>
+          <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--color-text-dim);">
+            <a href="https://bavarian-econs.vercel.app/" target="_blank" style="color: var(--color-accent); text-decoration: none;">bavarian-econs.vercel.app ↗</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 05: THE INVESTMENT PLAN -->
+  <section id="investment" class="section">
+    <p class="section-number">05 / 07</p>
+    <p class="eyebrow">The Investment Plan</p>
+    <h2 class="display-1">
+      La Inversión.<br>
+      <span class="accent-text">El Retorno.</span>
+    </h2>
+
+    <div class="investment-card">
+      <p style="font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim);">
+        Inversión Total Fase 1
+      </p>
+      <div class="investment-amount">10.000.000</div>
+      <p style="font-size: 1.125rem; color: var(--color-text-muted);">
+        COP (Pesos Colombianos)
+      </p>
+
+      <div class="investment-breakdown">
+        <div class="payment-item">
+          <span class="percentage">30%</span>
+          <span class="amount">3M COP</span>
+          <span class="label">Al firmar contrato<br>(inicio del proyecto)</span>
+        </div>
+        <div class="payment-item">
+          <span class="percentage">70%</span>
+          <span class="amount">7M COP</span>
+          <span class="label">Al entregar sitio funcional<br>(antes del go-live)</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 700px; margin: 3rem auto;">
+      <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
+        Lo que Obtienes por 15M
+      </h3>
+      <ul style="list-style: none; space-y: 1rem;">
+        <li style="padding-left: 1.5rem; position: relative; margin-bottom: 1rem; color: var(--color-text-muted);">
+          <span style="position: absolute; left: 0; color: var(--color-accent);">→</span>
+          Tu front-end de lujo convertido en Shopify theme funcional
+        </li>
+        <li style="padding-left: 1.5rem; position: relative; margin-bottom: 1rem; color: var(--color-text-muted);">
+          <span style="position: absolute; left: 0; color: var(--color-accent);">→</span>
+          Integración completa con tu tienda actual (productos, pagos, inventario)
+        </li>
+        <li style="padding-left: 1.5rem; position: relative; margin-bottom: 1rem; color: var(--color-text-muted);">
+          <span style="position: absolute; left: 0; color: var(--color-accent);">→</span>
+          Migración SEO sin perder posicionamiento
+        </li>
+        <li style="padding-left: 1.5rem; position: relative; margin-bottom: 1rem; color: var(--color-text-muted);">
+          <span style="position: absolute; left: 0; color: var(--color-accent);">→</span>
+          Experiencia digital que refleja tu heritage de 30 años
+        </li>
+        <li style="padding-left: 1.5rem; position: relative; margin-bottom: 1rem; color: var(--color-text-muted);">
+          <span style="position: absolute; left: 0; color: var(--color-accent);">→</span>
+          Listo para vender online con diseño de lujo internacional
+        </li>
+      </ul>
+    </div>
+
+    <div style="max-width: 600px; margin: 3rem auto; padding: 2rem; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 1rem; text-align: center;">
+      <p style="font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-text-dim); margin-bottom: 1rem;">
+        El Impacto del Diseño
+      </p>
+      <p class="body-large">
+        Una tienda online bien diseñada puede <strong style="color: var(--color-accent);">aumentar tu tasa de conversión del 1% al 3-5%</strong>. Con el tráfico que ya tienes, esto significa triplicar tus ventas online sin invertir más en publicidad.
+      </p>
+      <p style="margin-top: 1.5rem; color: var(--color-text-muted); font-size: 0.95rem;">
+        Más allá de las métricas: posicionamiento como marca digital premium y capacidad de competir con marcas internacionales en experiencia online.
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 06: THE STUDIO -->
+  <section id="the-studio" class="section">
+    <p class="section-number">06 / 07</p>
+    <p class="eyebrow">The Studio</p>
+    <h2 class="display-1">
+      Por qué<br>
+      <span class="accent-text">Monza Lab</span>
+    </h2>
+
+    <div class="studio-grid">
+      <div class="studio-image">
+        <img src="https://www.monzalab.com/assets/edgar-pink-BwWlAbda.png" alt="Edgar Navarro - Monza Lab Founder">
+      </div>
+
+      <div class="studio-content">
+        <h3>No vendemos templates. Construimos activos digitales de lujo.</h3>
+        <p class="body-large">
+          Monza Lab es un Global Execution Studio para ejecutivos y corporates. Entendemos heritage brands que necesitan modernizarse sin perder su esencia.
+        </p>
+
+        <ul class="studio-features">
+          <li>
+            <strong>Ex-KPMG Standard.</strong> Obsesión por el detalle y la ejecución impecable, como tu atelier pero en código.
+          </li>
+          <li>
+            <strong>Experiencia con Luxury Goods.</strong> Hemos trabajado con marcas premium que requieren diseño editorial y storytelling sofisticado.
+          </li>
+          <li>
+            <strong>Arquitectura Técnica Escalable.</strong> Headless commerce, performance optimization y SEO de clase mundial.
+          </li>
+          <li>
+            <strong>Ejecución Rápida sin Sacrificar Calidad.</strong> 6 semanas de diseño a producción, sin delegación a terceros.
+          </li>
+          <li>
+            <strong>Mentoría Estratégica.</strong> No solo entregamos código. Te enseñamos a operar tu plataforma digital como un asset financiero.
+          </li>
+        </ul>
+
+        <div style="margin-top: 2rem;">
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; font-style: italic;">
+            "Tomamos el front-end de lujo que ya diseñamos y lo convertimos en una plataforma e-commerce funcional, manteniendo cada detalle de la experiencia premium."
+          </p>
+          <p style="margin-top: 1rem; color: var(--color-text-dim); font-size: 0.875rem;">
+            — Edgar Navarro, Founder Monza Lab
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section id="contact" class="footer-cta">
+    <h2 class="display-2">
+      Ready to Transform<br>
+      <span class="accent-text">Beatriz Camacho Digital?</span>
+    </h2>
+    <p class="body-large" style="max-width: 600px; margin: 0 auto 3rem;">
+      Hablemos de cómo convertir tu Shopify actual en una experiencia e-commerce de lujo en 6 semanas.
+    </p>
+    <a href="https://calendar.notion.so/meet/monzaedgar/monzastudiopro" target="_blank" rel="noopener noreferrer" class="hero-cta">
+      Agendar Sesión Estratégica
+    </a>
+    <p style="margin-top: 2rem; color: var(--color-text-dim); font-size: 0.875rem;">
+      Propuesta válida hasta Marzo 15, 2026
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding: 3rem 2rem; border-top: 1px solid var(--color-border); text-align: center;">
+    <img src="https://www.monzalab.com/logo-crema.png" alt="Monza Lab" style="height: 32px; width: auto; margin-bottom: 1.5rem; opacity: 0.7;">
+    <p style="color: var(--color-text-dim); font-size: 0.875rem;">
+      © 2026 Monza Lab. Global Execution Studio.<br>
+      Building Investment-Grade Assets.
+    </p>
+    <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem;">
+      <a href="https://www.instagram.com/monza.lab/" target="_blank" style="color: var(--color-text-dim); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;">Instagram</a>
+      <a href="https://www.linkedin.com/in/edgarnavarrosoto/" target="_blank" style="color: var(--color-text-dim); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;">LinkedIn</a>
+      <a href="https://www.monzalab.com" target="_blank" style="color: var(--color-text-dim); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;">Website</a>
+    </div>
+  </footer>
+
+  <script>
+    // ========== ENHANCED NAVIGATION SYSTEM ==========
+    (function() {
+      const nav = document.getElementById('nav');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const progressFill = document.querySelector('.nav-progress-fill');
+      const hamburger = document.getElementById('navHamburger');
+      const mobileMenu = document.getElementById('navMobileMenu');
+      const mobileLinks = document.querySelectorAll('.nav-mobile-link');
+
+      // Scroll effects: nav background + progress bar + active section
+      window.addEventListener('scroll', () => {
+        // Nav background on scroll
+        if (window.scrollY > 100) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+
+        // Progress bar
+        const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progressFill.style.width = `${scrollPercentage}%`;
+
+        // Active section highlighting
+        updateActiveSection();
+      });
+
+      // Active section detection
+      function updateActiveSection() {
+        const sections = document.querySelectorAll('section[id]');
+        let currentSection = '';
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.scrollY >= (sectionTop - 200)) {
+            currentSection = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Mobile menu toggle
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          mobileMenu.classList.toggle('active');
+          document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu on link click
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Initialize active section on load
+      updateActiveSection();
+    })();
+
+    // ========== GSAP + SCROLL TRIGGER ANIMATIONS ==========
+    (function() {
+      // Register ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Initialize Lenis Smooth Scroll
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        smoothWheel: true,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Sync ScrollTrigger with Lenis
+      lenis.on('scroll', ScrollTrigger.update);
+
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+
+      gsap.ticker.lagSmoothing(0);
+
+      // ========== ANIMATION 1: Hero Entrance ==========
+      gsap.from('.hero-content', {
+        opacity: 0,
+        y: 60,
+        duration: 1.2,
+        ease: 'power3.out',
+        delay: 0.3
+      });
+
+      // ========== ANIMATION 2: Section Headers Reveal ==========
+      gsap.utils.toArray('.display-1, .display-2').forEach(title => {
+        gsap.from(title, {
+          scrollTrigger: {
+            trigger: title,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          },
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: 'power2.out'
+        });
+      });
+
+      // ========== ANIMATION 3: Cards Stagger ==========
+      const cardSelectors = [
+        '.gap-card',
+        '.phase-card',
+        '.deliverable-item'
+      ];
+
+      cardSelectors.forEach(selector => {
+        gsap.utils.toArray(selector).forEach((card, index) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // ========== ANIMATION 4: Investment Card Scale In ==========
+      const investmentCard = document.querySelector('.investment-card');
+      if (investmentCard) {
+        gsap.from(investmentCard, {
+          scrollTrigger: {
+            trigger: investmentCard,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          },
+          scale: 0.95,
+          opacity: 0,
+          duration: 1,
+          ease: 'back.out(1.4)'
+        });
+      }
+
+      // ========== ANIMATION 5: Number Counter (Investment Amount) ==========
+      const investmentAmount = document.querySelector('.investment-amount');
+      if (investmentAmount) {
+        const targetNumber = 10000000;
+        const counter = { value: 0 };
+
+        ScrollTrigger.create({
+          trigger: investmentAmount,
+          start: 'top 80%',
+          onEnter: () => {
+            gsap.to(counter, {
+              value: targetNumber,
+              duration: 2,
+              ease: 'power2.out',
+              onUpdate: function() {
+                investmentAmount.textContent = Math.floor(counter.value).toLocaleString('es-CO');
+              }
+            });
+          }
+        });
+      }
+
+      // ========== ANIMATION 6: Parallax Background Gradients ==========
+      gsap.utils.toArray('.bg-gradient-1, .bg-gradient-2').forEach(gradient => {
+        gsap.to(gradient, {
+          scrollTrigger: {
+            trigger: 'body',
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1
+          },
+          yPercent: 30,
+          ease: 'none'
+        });
+      });
+
+      // ========== ANIMATION 7: Mockup Images Parallax ==========
+      gsap.utils.toArray('.mockup-container img').forEach(img => {
+        gsap.from(img, {
+          scrollTrigger: {
+            trigger: img,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          },
+          yPercent: -10,
+          ease: 'none'
+        });
+      });
+
+      // ========== ANIMATION 8: Studio Image Slide In ==========
+      const studioImage = document.querySelector('.studio-image');
+      const studioContent = document.querySelector('.studio-content');
+
+      if (studioImage) {
+        gsap.from(studioImage, {
+          scrollTrigger: {
+            trigger: '.studio-grid',
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          },
+          x: -60,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out'
+        });
+      }
+
+      if (studioContent) {
+        gsap.from(studioContent, {
+          scrollTrigger: {
+            trigger: '.studio-grid',
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          },
+          x: 60,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out'
+        });
+      }
+
+      // ========== ANIMATION 9: List Items Stagger ==========
+      gsap.utils.toArray('.phase-list, .studio-features, .gap-list-full').forEach(list => {
+        const items = list.querySelectorAll('li');
+        if (items.length > 0) {
+          gsap.from(items, {
+            scrollTrigger: {
+              trigger: list,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            x: -20,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: 'power2.out'
+          });
+        }
+      });
+
+      // ========== ANIMATION 10: Section Numbers Badge ==========
+      gsap.utils.toArray('.section-number').forEach(badge => {
+        gsap.from(badge, {
+          scrollTrigger: {
+            trigger: badge,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse'
+          },
+          scale: 0,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'back.out(2)'
+        });
+      });
+
+    })();
+
+    // ========== MOCKUP CAROUSEL WITH DRAG SUPPORT ==========
+    (function() {
+      const carousel = document.getElementById('mockupCarousel');
+      if (!carousel) return;
+
+      const track = carousel.querySelector('.mockup-carousel-track');
+      const slides = Array.from(track.querySelectorAll('.mockup-slide'));
+      const prevBtn = document.querySelector('.carousel-prev');
+      const nextBtn = document.querySelector('.carousel-next');
+      const dots = document.querySelectorAll('.carousel-dot');
+
+      let currentIndex = 0;
+      let isDragging = false;
+      let startPos = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+
+      function updateCarousel() {
+        const offset = -currentIndex * 100;
+        track.style.transform = `translateX(${offset}%)`;
+
+        // Update dots
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+
+        // Update buttons
+        if (prevBtn) prevBtn.disabled = currentIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
+      }
+
+      function goToSlide(index) {
+        currentIndex = Math.max(0, Math.min(index, slides.length - 1));
+        updateCarousel();
+      }
+
+      // Button navigation
+      if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+      // Dot navigation
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+      });
+
+      // Drag functionality
+      function getPositionX(event) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+      }
+
+      function dragStart(event) {
+        isDragging = true;
+        startPos = getPositionX(event);
+        carousel.style.cursor = 'grabbing';
+      }
+
+      function drag(event) {
+        if (!isDragging) return;
+        const currentPosition = getPositionX(event);
+        currentTranslate = prevTranslate + currentPosition - startPos;
+      }
+
+      function dragEnd() {
+        isDragging = false;
+        carousel.style.cursor = 'grab';
+
+        const movedBy = currentTranslate - prevTranslate;
+
+        // If moved enough, go to next/prev slide
+        if (movedBy < -100 && currentIndex < slides.length - 1) {
+          currentIndex++;
+        } else if (movedBy > 100 && currentIndex > 0) {
+          currentIndex--;
+        }
+
+        prevTranslate = currentTranslate;
+        updateCarousel();
+      }
+
+      // Mouse events
+      carousel.addEventListener('mousedown', dragStart);
+      carousel.addEventListener('mousemove', drag);
+      carousel.addEventListener('mouseup', dragEnd);
+      carousel.addEventListener('mouseleave', dragEnd);
+
+      // Touch events
+      carousel.addEventListener('touchstart', dragStart, { passive: true });
+      carousel.addEventListener('touchmove', drag, { passive: true });
+      carousel.addEventListener('touchend', dragEnd);
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+        if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+      });
+
+      // Initialize
+      updateCarousel();
+    })();
+
+    // ========== GAP TABS FUNCTIONALITY ==========
+    (function() {
+      const tabBtns = document.querySelectorAll('.gap-tab-btn');
+      const tabPanels = document.querySelectorAll('.gap-tab-panel');
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetTab = btn.getAttribute('data-tab');
+
+          // Update buttons
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          // Update panels
+          tabPanels.forEach(panel => {
+            panel.classList.remove('active');
+            if (panel.id === `tab-${targetTab}`) {
+              panel.classList.add('active');
+            }
+          });
+        });
+      });
+    })();
+
+    // ========== DELIVERABLES ACCORDION ==========
+    (function() {
+      const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+      accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          const parent = header.parentElement;
+          parent.classList.toggle('active');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

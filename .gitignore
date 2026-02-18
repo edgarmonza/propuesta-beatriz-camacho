@@ -1,0 +1,8 @@
+.DS_Store
+*.log
+node_modules/
+.env
+.vercel
+
+# Exclude large PNG files (we use optimized JPGs)
+assets/screenshots/*.png
